@@ -20,7 +20,7 @@ inputs:
     default: "false"
     description: "Run the post step to save the cache even if another step before fails"
   utility-image:
-    default: "ghcr.io/eeacms/rsync:latest"
+    default: "eeacms/rsync:latest"
     description: "The container image to use for injecting and extracting the cache"
   builder:
     default: default
