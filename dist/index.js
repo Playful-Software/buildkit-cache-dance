@@ -1292,7 +1292,7 @@ FROM ${containerImage}
 COPY buildstamp buildstamp
 RUN --mount=${mountArgs} \
     --mount=type=bind,source=.,target=/var/dance-cache \
-    cp -p -R /var/dance-cache/. ${targetPath} ${ownershipCommand} || true
+    rsync -avhW --no-compress --progress /var/dance-cache/. ${targetPath} ${ownershipCommand} || true
 `;
     await (0, $evV72$fspromises).writeFile((0, $evV72$path).join(scratchDir, "Dancefile.inject"), dancefileContent);
     console.log(dancefileContent);

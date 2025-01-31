@@ -20,13 +20,13 @@ inputs:
     default: "false"
     description: "Run the post step to save the cache even if another step before fails"
   utility-image:
-    default: "ghcr.io/containerd/busybox:latest"
+    default: "ghcr.io/eeacms/rsync:latest"
     description: "The container image to use for injecting and extracting the cache"
   builder:
     default: default
     description: "The name of the builder. Default: 'default'"
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
-  post: 'dist/index.js'
-  post-if: 'success() || github.event.inputs.save-always'
+  using: "node20"
+  main: "dist/index.js"
+  post: "dist/index.js"
+  post-if: "success() || github.event.inputs.save-always"
