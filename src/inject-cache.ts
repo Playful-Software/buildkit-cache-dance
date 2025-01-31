@@ -5,8 +5,6 @@ import { run } from './run.js';
 import { notice } from '@actions/core';
 
 async function injectCache(cacheSource: string, cacheOptions: CacheOptions, scratchDir: string, containerImage: string, builder: string) {
-    // Clean Scratch Directory
-    await fs.rm(scratchDir, { recursive: true, force: true });
     await fs.mkdir(scratchDir, { recursive: true });
 
     // Prepare Cache Source Directory
@@ -40,14 +38,6 @@ RUN --mount=${mountArgs} \
 
     // Inject Data into Docker Cache
     await run('docker', ['buildx', 'build', '--builder', builder ,'-f', path.join(scratchDir, 'Dancefile.inject'), '--tag', 'dance:inject', cacheSource]);
-
-    // Clean Directories
-    try {
-        await fs.rm(cacheSource, { recursive: true, force: true });
-    } catch (err) {
-        // Ignore Cleaning Errors
-        notice(`Error while cleaning cache source directory: ${err}. Ignoring...`);
-    }
 }
 
 

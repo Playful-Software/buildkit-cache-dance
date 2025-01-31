@@ -42,7 +42,6 @@ RUN --mount=${mountArgs} \
     );
 
     // Move Cache into Its Place
-    await run('sudo', ['rm', '-rf', cacheSource]);
     await fs.rename(path.join(scratchDir, 'dance-cache'), cacheSource);
 }
 
